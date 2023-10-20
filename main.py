@@ -7,4 +7,5 @@ app = Flask(__name__)
 def main():
     return "Test Heroku app"
 
-app.run()
+if (__name__) == "__main__":
+    app.run(debug=False, host='0.0.0.0')
