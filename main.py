@@ -5,8 +5,11 @@ from pymongo.server_api import ServerApi
 from bson import ObjectId
 import os
 
-uri = "mongodb+srv://vasantharaja200295:cjcCN2FklWjw427W@cluster0.vpzkuqi.mongodb.net/mydb?retryWrites=true&w=majority"
+load_dotenv('.env')
+
+uri = f"mongodb+srv://{os.getenv('MONGOUSERNAME')}:{os.getenv('PASSWORD')}@cluster0.vpzkuqi.mongodb.net/?retryWrites=true&w=majority"
 mongoClient = MongoClient(uri, server_api=ServerApi('1'))
+
 
 app = Flask(__name__)
 
@@ -15,7 +18,6 @@ try:
     print(">> Pinged your deployment. You successfully connected to MongoDB!")
 except Exception as e:
     print(e)
-
 
 
 db = mongoClient.get_database('mydb').get_collection('todos')
