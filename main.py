@@ -1,5 +1,4 @@
 from flask import Flask, send_from_directory, render_template, request, redirect
-from flask_cors import CORS
 from dotenv import load_dotenv
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
@@ -10,7 +9,6 @@ uri = f"mongodb+srv://{os.getenv("MONGOUSERNAME")}:{os.getenv("PASSWORD")}@clust
 mongoClient = MongoClient(uri, server_api=ServerApi('1'))
 
 app = Flask(__name__)
-cors = CORS(app)
 
 try:
     mongoClient.admin.command('ping')
