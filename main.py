@@ -5,7 +5,7 @@ from pymongo.server_api import ServerApi
 from bson import ObjectId
 import os
 
-uri = f"mongodb+srv://{os.getenv("MONGOUSERNAME")}:{os.getenv("PASSWORD")}@cluster0.vpzkuqi.mongodb.net/mydb?retryWrites=true&w=majority"
+uri = "mongodb+srv://"+{os.getenv("MONGOUSERNAME")}+":"+{os.getenv("PASSWORD")}+"@cluster0.vpzkuqi.mongodb.net/mydb?retryWrites=true&w=majority"
 mongoClient = MongoClient(uri, server_api=ServerApi('1'))
 
 app = Flask(__name__)
