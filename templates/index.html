@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #submit-button {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Flask & mango db Todo</h1>
+      <form action="{{url_for('add_todo')}}" method="post">
+        <input type="text" name="todo" id="todo" />
+        <button type="submit">Add Todo</button>
+      </form>
+      {%for item in todos%}
+      <div>
+        <form action="{{url_for('update_todo', id=item._id)}}" method="post">
+          <input
+            type="text"
+            name="update_todo"
+            id="updateField"
+            value="{{item.todoItem}}"
+            style="border: 0; font-size: large"
+          />
+          <button type="submit" id="update-button" style="display: none">
+            Update
+          </button>
+        </form>
+        <a href="{{url_for('complete_todo', id=item._id)}}">Compeleted</a>
+        <a href="{{url_for('delete_todo', id=item._id)}}">Delete</a>
+      </div>
+      {%endfor%}
+    </div>
+
+    <script>
+      const textField = document.getElementById("updateField");
+      const updateButton = document.getElementById("update-button");
+
+      function toggleButtonVisibility() {
+        if (
+          textField.value.trim() !== "" ||
+          textField === document.activeElement
+        ) {
+            updateButton.style.display = "block";
+        } else {
+            updateButton.style.display = "none";
+        }
+      }
+
+      // Add event listeners for input, focus, and blur events
+      textField.addEventListener("input", toggleButtonVisibility);
+      textField.addEventListener("focus", toggleButtonVisibility);
+      textField.addEventListener("blur", toggleButtonVisibility);
+    </script>
+  </body>
+</html>
